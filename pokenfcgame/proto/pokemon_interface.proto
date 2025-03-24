@@ -1,0 +1,57 @@
+// pokemon.proto
+// python -m grpc_tools.protoc --proto_path=src --python_out=build/gen --pyi_out=. --grpc_python_out=. src/pokemon_interface.proto
+syntax = "proto3";
+package pokemoninterface;
+import "google/protobuf/empty.proto";
+
+
+service PokemonUserEvents {
+    // rpc SendCardEvent (CardEventMessage) returns (CardEventMessage) {}
+    // rpc SwitchPokemon (PokemonMessage) returns (PokemonMessage) {}
+    // rpc SendAttack (AttackMessage) returns (AttackMessage) {}
+    rpc SendHackedUpMessage (HackedUpMessage) returns (HackedUpMessage) {}
+}
+
+message HackedUpMessage {
+    optional string pokemon_name = 1;
+    optional uint32 attack = 2;
+}
+
+message CardEventMessage {
+    optional AttackMessage attackmessage = 1;
+    optional PokemonMessage pokemonmessage = 2;
+}
+
+message AttackMessage {
+    uint32 attack_id = 1;
+}
+
+message PokemonMessage {
+    uint32 player_id = 1;
+    optional string pokemon_name = 2;
+    optional uint32 pokemon_id = 3;
+    repeated uint32 moves = 4;
+    optional string trainer = 5;
+    optional uint32 trainer_id = 6;
+    repeated bool ribbons = 7; // repeated is inherently optional https://stackoverflow.com/a/25637833
+    optional uint32 hp = 8;
+    optional uint32 attack = 9;
+    optional uint32 defense = 10;
+    optional uint32 spcatk = 11;
+    optional uint32 spcdef = 12;
+    optional uint32 speed = 13;
+
+    optional uint32 iv_hp = 14;
+    optional uint32 iv_attack = 15;
+    optional uint32 iv_defense = 16;
+    optional uint32 iv_spcatk = 17;
+    optional uint32 iv_spcdef = 18;
+    optional uint32 iv_speed = 19;
+
+    optional uint32 ev_hp = 20;
+    optional uint32 ev_attack = 21;
+    optional uint32 ev_defense = 22;
+    optional uint32 ev_spcatk = 23;
+    optional uint32 ev_spcdef = 24;
+    optional uint32 ev_speed = 25;
+}
